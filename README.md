@@ -6,17 +6,18 @@ bastion_IP = 35.211.93.41
 someinternalhost_IP = 10.142.0.3
 
 testapp_IP = 35.204.75.54
+
 testapp_port = 9292
 
 Команад для создания VM с помощью gcloud
 
-gcloud compute instances create reddit-app\
-  --boot-disk-size=10GB \
-  --image-family ubuntu-1604-lts \
-  --image-project=ubuntu-os-cloud \
-  --machine-type=g1-small \
-  --tags puma-server \
-  --restart-on-failure
+    gcloud compute instances create reddit-app\
+    --boot-disk-size=10GB \
+    --image-family ubuntu-1604-lts \
+    --image-project=ubuntu-os-cloud \
+    --machine-type=g1-small \
+    --tags puma-server \
+    --restart-on-failure
 
 Написаны скрипты для автоматической  установки пакетом для приложения Reddit
     install_ruby.sh -- обновляет систему и устанавливает Ruby
