@@ -4,12 +4,18 @@ provider "google" {
   region  = "${var.region}"
 }
 
+resource "google_compute_project_metadata" "ssh_userkeys" {
+  metadata {
+    ssh-keys = <<EOF
+appuser1:${file(var.public_key_path)}
+appuser2:${file(var.public_key_path)}
+appuser3:${file(var.public_key_path)}
+    EOF
+  } 
+}
+
 resource "google_compute_instance" "app" {
   name = "reddit-app"
-
-  metadata {
-    ssh-keys = "appuser:${file(var.public_key_path)}"
-  }
 
   machine_type = "g1-small"
   zone         = "${var.zone}"
@@ -23,7 +29,9 @@ resource "google_compute_instance" "app" {
       image = "${var.disk_image}"
     }
   }
-
+  metadata {
+    ssh-keys = "appuser:${file(var.public_key_path)}"
+  }
   # определение сетевого интерфейса
   network_interface {
     # сеть, к которой присоединить данный интерфейс

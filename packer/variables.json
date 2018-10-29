@@ -1,0 +1,8 @@
+{
+    "project_id": "indigo-winter-219415",
+    "source_image_family": "ubuntu-1604-lts",
+    "image_description": "Образ для reddit-base",
+    "disk_type": "pd-standard",
+    "disk_size": "10",
+    "image_family": "reddit-full"
+}
