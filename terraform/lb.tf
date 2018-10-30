@@ -2,7 +2,10 @@ resource "google_compute_instance_group" "redd_serv" {
     name            = "redd-web"
     description     = "приложение reddit instance group"
 
-    instances       = ["${google_compute_instance.app.*.self_link}"]
+    instances       = [
+        "${google_compute_instance.app.*.self_link}",
+        "${google_compute_instance.app-2.self_link}"
+        ]
 
     named_port {
         name    = "http9292"
@@ -14,8 +17,8 @@ resource "google_compute_instance_group" "redd_serv" {
 
 resource "google_compute_health_check" "app_health" {
     name                = "app-health"
-    check_interval_sec  = 3
-    timeout_sec         = 3
+    check_interval_sec  = 10
+    timeout_sec         = 10
 
     tcp_health_check {
         port    = "9292"
@@ -28,7 +31,7 @@ resource "google_compute_backend_service" "app_backend" {
 
     protocol            = "HTTP"
     port_name           = "http9292"
-    timeout_sec         = "5"
+    timeout_sec         = "10"
 
     backend {
         group = "${google_compute_instance_group.redd_serv.self_link}"
