@@ -55,7 +55,3 @@ resource "google_compute_global_forwarding_rule" "app_url_rule" {
   target                = "${google_compute_target_http_proxy.app_proxy.self_link}"
   port_range            = "80"
 }
-
-
-
-

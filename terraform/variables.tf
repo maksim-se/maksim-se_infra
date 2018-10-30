@@ -26,5 +26,5 @@ variable zone {
 
 variable vm_count {
   description = "кол-во вм в кластере"
-  default     = "2"
+  default     = "1"
 }
