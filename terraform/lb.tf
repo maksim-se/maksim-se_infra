@@ -1,10 +1,10 @@
-resource "google_compute_instance_group" "redd_serv" {
-    name            = "redd-web"
+resource "google_compute_instance_group" "reddit-app" {
+    name            = "reddit-app"
     description     = "приложение reddit instance group"
 
     instances       = [
         "${google_compute_instance.app.*.self_link}",
-        "${google_compute_instance.app-2.self_link}"
+        #"${google_compute_instance.app-2.*.self_link}"
         ]
 
     named_port {
@@ -34,7 +34,7 @@ resource "google_compute_backend_service" "app_backend" {
     timeout_sec         = "10"
 
     backend {
-        group = "${google_compute_instance_group.redd_serv.self_link}"
+        group = "${google_compute_instance_group.reddit-app.self_link}"
     }
 
     health_checks = ["${google_compute_health_check.app_health.self_link}"]

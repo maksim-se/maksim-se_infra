@@ -23,3 +23,8 @@ variable zone {
   description = "Zone"
   default     = "europe-west4-b"
 }
+
+variable vm_count {
+  description = "кол-во вм в кластере"
+  default     = "2"
+}
