@@ -1,6 +1,0 @@
-project = "indigo-winter-219415"
-public_key_path = "~/.ssh/appuser.pub"
-disk_image = "reddit-base-1540228545"
-private_key_path = "~/.ssh/appuser"
-zone = "europe-west1-b"
-vm_count = "2"
