@@ -11,3 +11,13 @@ variable db_disk_image {
   description = "Disk image for reddit db"
   default = "reddit-db-base"
 }
+
+
+variable name {
+  description = "Resource name, e.g.: reddit-db"
+  default     = "reddit-db"
+}
+
+variable tags {
+  default     = "reddit-db"
+}

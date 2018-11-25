@@ -6,8 +6,8 @@ provider "google" {
 
 locals {
   app_name  = "reddit-app-${var.env}"
-  db_name   = "reddit-dn-${local.env}"
-  vpc_name  = "reddit-vpc-${local.env}"
+  db_name   = "reddit-dn-${var.env}"
+  vpc_name  = "reddit-vpc-${var.env}"
 }
 
 module "app" {

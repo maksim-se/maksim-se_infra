@@ -2,6 +2,16 @@ variable public_key_path {
   description = "Path to the public key used for ssh access"
 }
 
+variable name {
+  description = "Resource name, e.g.: reddit-app"
+  default     = "reddit-app"
+}
+
+variable tags {
+  default     = "reddit-app"
+}
+
+
 variable zone {
   description = "Zone"
   default     = "us-central1-a"
