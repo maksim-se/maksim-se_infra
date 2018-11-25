@@ -1,4 +1,8 @@
 # maksim-se_infra
+	--- Описание дом. задания №7
+Одновременное применение конфи-ций приводит к ошибке 
+		Error locking state: Error acquiring the state lock: writing "gs://storage-bucket-stage/terraform/prod/default.tflock" failed: googleapi: Error 412: Precondition Failed, conditionNotMet
+
 
   --- Описание дом. задания №6
 

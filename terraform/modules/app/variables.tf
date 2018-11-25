@@ -4,10 +4,13 @@ variable public_key_path {
 
 variable zone {
   description = "Zone"
-  default     = "europe-west4-b"
+  default     = "us-central1-a"
 }
 
 variable app_disk_image {
   description = "Disk image for reddit app"
   default = "reddit-app-base"
+}
+variable "app_db_ip" {
+  description = "Environment DATABASE_URL"
 }

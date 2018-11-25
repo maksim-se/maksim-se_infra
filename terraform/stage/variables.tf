@@ -4,7 +4,7 @@ variable project {
 
 variable region {
   description = "Region"
-  default     = "europe-west1"
+  default     = "europe-west4"
 }
 
 variable public_key_path {
@@ -17,7 +17,7 @@ variable private_key_path {
 
 variable zone {
   description = "Zone"
-  default     = "europe-west4-b"
+  default     = "europe-west4-a"
 }
 
 variable vm_count {

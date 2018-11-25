@@ -4,7 +4,7 @@ variable public_key_path {
 
 variable zone {
   description = "Zone"
-  default     = "europe-west4-b"
+  default     = "us-central1-a"
 }
 
 variable db_disk_image {
