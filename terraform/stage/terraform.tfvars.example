@@ -5,4 +5,5 @@ db_disk_image = "reddit-base-1541443201"
 private_key_path = "~/.ssh/appuser"
 zone = "europe-west4-a"
 vm_count = "1"
+env = "stage"
 
