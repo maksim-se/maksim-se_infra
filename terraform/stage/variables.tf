@@ -7,6 +7,11 @@ variable region {
   default     = "europe-west4"
 }
 
+
+variable "env" {
+  description = "project env like prod, stage, dev ..."
+}
+
 variable public_key_path {
   description = "Path to the public key used for ssh access"
 }
