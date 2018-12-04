@@ -7,6 +7,10 @@ variable region {
   default     = "us-central1"
 }
 
+variable "env" {
+  description = "project env like prod, stage, dev ..."
+}
+
 variable public_key_path {
   description = "Path to the public key used for ssh access"
 }
@@ -17,7 +21,7 @@ variable private_key_path {
 
 variable zone {
   description = "Zone"
-  default     = "us-central1-a"
+  default     = "europe-west4-a"
 }
 
 variable vm_count {

@@ -7,7 +7,6 @@ variable region {
   default     = "europe-west4"
 }
 
-
 variable "env" {
   description = "project env like prod, stage, dev ..."
 }

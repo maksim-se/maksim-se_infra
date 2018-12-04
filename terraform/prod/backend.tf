@@ -1,6 +1,6 @@
 terraform {
     backend "gcs" {
-    bucket = "storage-bucket-prod"
+    bucket = "sb-prod"
     prefix = "terraform/prod"
 }
 }
