@@ -60,3 +60,4 @@ Lock Info:
 			packer build -var-file=packer/variables.jsonpacker/db.json
 			packer build -var-file=packer/variables.json packer/app.json
 			ansible-playbook -i ansible/inventory ansible/site.yml
+
