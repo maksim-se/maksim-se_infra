@@ -35,7 +35,7 @@
         dest: /etc/systemd/system/puma.service
       tags: app-tag
       notify: reload puma
-    
+
     - name: Add config for DB connection
       template:
         src: templates/db_config.j2
