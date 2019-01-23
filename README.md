@@ -61,3 +61,12 @@ Lock Info:
 			packer build -var-file=packer/variables.json packer/app.json
 			ansible-playbook -i ansible/inventory ansible/site.yml
 
+  --- Описание дом. задания №9
+  1. плейбуки разнесены в раздельные роли.
+  2. созданы различные окрежения: prod и stage
+  3. использована роль Nginx: jdauphant.nginx
+  4. настроен ansible vault
+  5. встроен вывод о используемом окружении
+  5. в терраформе открыл 80 порт
+  6. при пересоздании  серверов приходиться править инвентори и файл с переменными
+  7. Настроен travisCI на валидацию packer шаблонов, валидацию terraform и tflint окружений, валидацию ansible-lint плейбуков.
