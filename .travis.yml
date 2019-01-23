@@ -39,7 +39,6 @@ script:
  - cd ${TRAVIS_BUILD_DIR}/ansible
  - ansible-lint playbooks/*.yml  --exclude=roles/jdauphant.nginx
 
-
 notifications:
   slack:
     rooms:
