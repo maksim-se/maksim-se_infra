@@ -1,0 +1,45 @@
+dist: trusty
+sudo: required
+language: bash
+env:
+ - pack_ver=1.3.1 terraform_ver=0.11.10 ansible_ver=2.7.1 ans_lint_ver_V=3.5.1
+before_install:
+ - curl https://raw.githubusercontent.com/express42/otus-homeworks/2018-09/run.sh | bash
+ - sudo pip install --upgrade pip
+install:
+ - |
+    wget https://releases.hashicorp.com/packer/${pack_ver}/packer_${pack_ver}_linux_amd64.zip -O packer.zip
+    sudo unzip packer.zip -d /usr/bin
+    wget https://releases.hashicorp.com/terraform/${terraform_ver}/terraform_${terraform_ver}_linux_amd64.zip -O tf.zip
+    sudo unzip tf.zip -d /usr/bin
+    wget https://github.com/wata727/tflint/releases/download/v0.7.2/tflint_linux_amd64.zip -O tflint.zip
+    sudo unzip tflint.zip -d /usr/bin
+ - sudo pip install ansible==${ansible_ver} ansible-lint==${ans_lint_ver_V}
+ - echo $PATH
+before_script:
+ - touch ~/.ssh/appuser ~/.ssh/appuser.pub
+ - mv packer/variables.json.example packer/variables.json
+ - mv terraform/terraform.tfvars.example terraform/terraform.tfvars
+ - mv terraform/stage/terraform.tfvars.example terraform/stage/terraform.tfvars
+ - mv terraform/prod/terraform.tfvars.example terraform/prod/terraform.tfvars
+script:
+ - cd ${TRAVIS_BUILD_DIR}/packer
+ - packer validate -var-file=variables.json ubuntu16.json
+ - packer validate -var-file=variables.json immutable.json
+ - cd ${TRAVIS_BUILD_DIR}
+ - packer validate -var-file=packer/variables.json  packer/app.json
+ - packer validate -var-file=packer/variables.json  packer/db.json
+
+ - cd ${TRAVIS_BUILD_DIR}/terraform
+ - cd ${TRAVIS_BUILD_DIR}/terraform/stage
+ - terraform init -backend=false && terraform validate && tflint
+ - cd ${TRAVIS_BUILD_DIR}/terraform/prod
+ - terraform init -backend=false && terraform validate && tflint
+
+ - cd ${TRAVIS_BUILD_DIR}/ansible
+ - ansible-lint playbooks/*.yml  --exclude=roles/jdauphant.nginx
+
+notifications:
+  slack:
+    rooms:
+      secure: hn7NLK6YIfglgvNXS7WWB+X+S05C5QA/GW+CQbXwdmnX4a6yf+PVsbsJj+6GzXj8bR62Bbtugr5eYycA5O1dQnUyDJ8RhqEc+dNCHjJXaIhkiFmQPCNAj4cfRXQGuLc2bocDYNXcMPkYHgSxgtHwPYaexeEC+U7+goN9Gsx/Bl+20bWfLC9+bkhPvH++5xdNLXabE4CJjz8bCuPEu930lEIhbva1dP3Awstmr7nYLcaT8O6wGEpPtJWMLf2I/Rb3doTZX+LLl/pwld4q1ZtmEAQQSWUj39fDQiiOFfXD09YqfG82gRhsCXy80oOE6uCepcJeXzDYt3oWsOh0mV/q65p/fwYjm6cRNjgKPeYUZqK12LsE2JAcbG71cg5l6GQTnzhGCVNxTR0TTJJwe0wBRyViEc2dE8mhZeEezVWxnrPQMW6N9FL9U1slSBJU6oKKqluvHtWddvjIRQEmJrWr2iyTUen7RIRlHEKg2QFJKxyc2WZUe+rifkr9V31eNcDw+x7fpIdMt9OjOjYMgnULowCUGZxnsWczLVEswSG2tpcxM02o3eOgmLA3L6/Os3e1u2AiAUmpnNG4wdSeD87DsRgkBEmXzSps3shBrZd6S8CtkUV+6QDg3u56WRXMbOOplWfHmgUTYHwqnURkxREUYeJDATvzD2q0zPgbE9LswGw=
